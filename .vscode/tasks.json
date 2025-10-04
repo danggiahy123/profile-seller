@@ -1,0 +1,91 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "🚀 Start Profile Seller",
+            "type": "shell",
+            "command": "npm",
+            "args": ["run", "start"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "showReuseMessage": false,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "detail": "Start both frontend and backend servers",
+            "runOptions": {
+                "runOn": "default"
+            }
+        },
+        {
+            "label": "🎯 Start Full Stack",
+            "type": "shell", 
+            "command": "${workspaceFolder}/start-full-stack.bat",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "detail": "Start development environment with detailed info"
+        },
+        {
+            "label": "🛑 Stop Servers",
+            "type": "shell",
+            "command": "${workspaceFolder}/stop-servers.bat", 
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "detail": "Stop all running servers"
+        },
+        {
+            "label": "🔧 Dev Only (Frontend)",
+            "type": "shell",
+            "command": "npm",
+            "args": ["run", "dev"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always", 
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "detail": "Start frontend development server only"
+        },
+        {
+            "label": "🗄️ Backend Only",
+            "type": "shell",
+            "command": "node",
+            "args": ["backend/test-server.js"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared", 
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "detail": "Start backend server only"
+        }
+    ]
+}

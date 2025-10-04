@@ -1,0 +1,381 @@
+/* Complete Tailwind CSS Build for Profile Seller */
+
+/* Base Tailwind classes */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Component Classes */
+@layer components {
+  /* Buttons */
+  .btn-primary {
+    @apply bg-teal-500 text-white px-6 py-3 rounded-lg hover:bg-teal-600 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:scale-105;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition-all duration-300 font-medium shadow-lg hover:shadow-xl;
+  }
+  
+  .btn-outline {
+    @apply border-2 border-teal-500 text-teal-500 px-6 py-3 rounded-lg hover:bg-teal-500 hover:text-white transition-all duration-300 font-medium;
+  }
+  
+  /* Cards */
+  .card {
+    @apply bg-white rounded-xl shadow-md p-6 border border-gray-100 hover:shadow-lg transition-all duration-300;
+  }
+  
+  .product-card {
+    @apply bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100 transform hover:scale-105;
+  }
+  
+  .stat-card {
+    @apply bg-white rounded-xl shadow-md p-6 border border-gray-100 hover:shadow-lg transition-all duration-300;
+  }
+  
+  /* Forms */
+  .form-input {
+    @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all duration-300;
+  }
+  
+  .form-select {
+    @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all duration-300;
+  }
+  
+  .search-bar {
+    @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all duration-300;
+  }
+  
+  /* Navigation */
+  .navbar {
+    @apply bg-white shadow-sm border-b border-gray-200 px-4 py-3;
+  }
+  
+  .nav-link {
+    @apply text-gray-600 hover:text-teal-500 transition-colors duration-300 font-medium;
+  }
+  
+  .nav-link.active {
+    @apply text-teal-500 font-semibold;
+  }
+  
+  /* Category Filters */
+  .category-filter {
+    @apply px-4 py-2 rounded-full text-sm text-gray-600 bg-gray-100 hover:bg-teal-100 hover:text-teal-700 cursor-pointer transition-all duration-300 border border-transparent hover:border-teal-300;
+  }
+  
+  .category-filter.active {
+    @apply bg-teal-500 text-white border-teal-500 hover:bg-teal-600;
+  }
+  
+  /* Tables */
+  .table {
+    @apply w-full bg-white rounded-lg shadow-sm overflow-hidden;
+  }
+  
+  .table th {
+    @apply bg-gray-50 px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200;
+  }
+  
+  .table td {
+    @apply px-6 py-4 text-sm text-gray-900 border-b border-gray-200;
+  }
+  
+  /* Loading */
+  .loading-spinner {
+    @apply animate-spin rounded-full h-6 w-6 border-b-2 border-teal-500;
+  }
+  
+  .loading-dots {
+    @apply text-gray-400;
+  }
+  
+  /* Rating */
+  .rating-stars {
+    @apply text-yellow-400 text-lg;
+  }
+  
+  /* Price */
+  .price-tag {
+    @apply text-xl font-bold text-teal-600;
+  }
+  
+  .price-old {
+    @apply text-lg text-gray-500 line-through;
+  }
+}
+
+/* Layout Components */
+@layer utilities {
+  /* Container */
+  .container-main {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  /* Grid Layouts */
+  .grid-responsive {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
+  }
+  
+  .grid-cards {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6;
+  }
+  
+  /* Flexbox Utilities */
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+  
+  .flex-between {
+    @apply flex items-center justify-between;
+  }
+  
+  .flex-col-center {
+    @apply flex flex-col items-center justify-center;
+  }
+  
+  /* Spacing */
+  .section-padding {
+    @apply py-12 lg:py-16;
+  }
+  
+  .card-padding {
+    @apply p-6 lg:p-8;
+  }
+  
+  /* Text Styles */
+  .text-gradient {
+    @apply bg-gradient-to-r from-teal-500 to-purple-600 bg-clip-text text-transparent;
+  }
+  
+  .heading-primary {
+    @apply text-3xl lg:text-4xl font-bold text-gray-900 mb-4;
+  }
+  
+  .heading-secondary {
+    @apply text-2xl lg:text-3xl font-semibold text-gray-900 mb-3;
+  }
+  
+  .text-body {
+    @apply text-gray-600 leading-relaxed;
+  }
+  
+  /* Animations */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in forwards;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out forwards;
+  }
+  
+  .hover-lift {
+    @apply transition-transform duration-300 ease-in-out;
+  }
+  
+  .hover-lift:hover {
+    @apply transform scale-105;
+  }
+  
+  .hover-glow {
+    @apply transition-all duration-300 ease-in-out;
+  }
+  
+  .hover-glow:hover {
+    box-shadow: 0 0 20px rgba(20, 184, 166, 0.3);
+  }
+}
+
+/* Custom Keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(20, 184, 166, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(20, 184, 166, 0.8), 0 0 30px rgba(20, 184, 166, 0.4);
+  }
+}
+
+/* Hero Section Specific */
+.hero-gradient {
+  @apply bg-gradient-to-br from-teal-500 via-teal-600 to-purple-600;
+}
+
+.hero-text {
+  @apply text-white;
+}
+
+/* Product Page Specific */
+.product-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8;
+}
+
+.product-card-overlay {
+  @apply absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-10 transition-all duration-300 rounded-lg;
+}
+
+.category-badge {
+  @apply inline-block px-3 py-1 text-xs font-semibold text-teal-600 bg-teal-100 rounded-full mb-3;
+}
+
+/* Admin Dashboard Specific */
+.stat-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6;
+}
+
+.chart-container {
+  @apply bg-white rounded-lg shadow-md p-6;
+}
+
+.sidebar {
+  @apply bg-gray-800 text-white w-64 min-h-screen;
+}
+
+.sidebar-link {
+  @apply block px-6 py-3 text-gray-300 hover:text-white hover:bg-gray-700 transition-all duration-300;
+}
+
+.sidebar-link.active {
+  @apply text-white bg-gray-700 border-r-4 border-teal-500;
+}
+
+/* Background Patterns */
+.bg-pattern-dots {
+  background-image: radial-gradient(circle at 1px 1px, rgba(0,0,0,0.04) 1px, transparent 0);
+  background-size: 20px 20px;
+}
+
+.bg-pattern-grid {
+  background-image: 
+    linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-teal-500 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-teal-600;
+}
+
+/* Focus States */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2;
+}
+
+/* Responsive Utilities */
+@media (max-width: 640px) {
+  .mobile-padding {
+    @apply px-4;
+  }
+  
+  .mobile-text-sm {
+    @apply text-sm;
+  }
+  
+  .mobile-grid-1 {
+    @apply grid-cols-1;
+  }
+}
+
+@media (max-width: 768px) {
+  .tablet-padding {
+    @apply px-6;
+  }
+  
+  .tablet-grid-2 {
+    @apply grid-cols-2;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .no-print {
+    @apply hidden;
+  }
+  
+  .print-text {
+    @apply text-black;
+  }
+}
+
+/* Dark Mode Preparation */
+@media (prefers-color-scheme: dark) {
+  .dark-mode {
+    @apply bg-gray-900 text-white;
+  }
+}
+
+/* Accessibility Enhancements */
+.sr-only {
+  @apply absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0;
+}
+
+.focus-visible:focus {
+  @apply outline-none ring-2 ring-teal-500 ring-offset-2;
+}
+
+/* Animation Delays */
+.delay-100 {
+  animation-delay: 0.1s;
+}
+
+.delay-200 {
+  animation-delay: 0.2s;
+}
+
+.delay-300 {
+  animation-delay: 0.3s;
+}

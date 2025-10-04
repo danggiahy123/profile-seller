@@ -10,7 +10,8 @@ let sortBy = 'newest';
 let wishlist = [];
 let cart = [];
 
-const API_BASE = 'http://localhost:3000/api';
+// API_BASE is already defined globally from auth.js
+// const API_BASE = 'http://localhost:3000/api';
 
 document.addEventListener('DOMContentLoaded', function() {
     checkAuth();
@@ -168,7 +169,7 @@ function renderProducts() {
     empty.classList.add('hidden');
     
     container.innerHTML = `
-        <div class="grid ${viewMode === 'grid' ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' : 'grid-cols-1'} gap-6">
+        <div class="grid-responsive animate-fade-in">
             ${currentProducts.map(product => renderProductCard(product)).join('')}
         </div>
     `;
@@ -179,51 +180,58 @@ function renderProductCard(product) {
     const isInCart = cart.includes(product.id);
     
     return `
-        <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow ${viewMode === 'list' ? 'flex' : ''}">
+        <div class="product-item animate-fadeIn" onclick="viewProduct('${product.id}')">
             <!-- Product Image -->
-            <div class="${viewMode === 'list' ? 'w-48 h-48' : 'aspect-square'} bg-gray-100 flex items-center justify-center">
-                <i class="fas fa-image text-4xl text-gray-400"></i>
+            <div class="product-image-placeholder">
+                <i class="fas fa-image"></i>
+                
+                <!-- Category Badge -->
+                <div class="absolute top-2 left-2 bg-blue-500 text-white px-2 py-1 rounded text-xs font-medium">${getCategoryName(product.category)}</div>
+                
+                <!-- Wishlist Button -->
+                <button onclick="event.stopPropagation(); toggleWishlistItem('${product.id}')" 
+                        class="wishlist-btn ${isInWishlist ? 'active' : ''}">
+                    <i class="fas fa-heart"></i>
+                </button>
             </div>
             
-            <!-- Product Info -->
-            <div class="p-6 ${viewMode === 'list' ? 'flex-1' : ''}">
-                <div class="flex items-start justify-between mb-2">
-                    <h3 class="text-lg font-semibold text-gray-900 line-clamp-2">${product.title}</h3>
-                    <span class="px-2 py-1 bg-gray-100 text-gray-700 rounded-full text-xs">
-                        ${getCategoryName(product.category)}
-                    </span>
+            <div class="card-content">
+                <!-- Rating -->
+                <div class="rating-stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span class="rating-text">(4.8)</span>
                 </div>
                 
-                <p class="text-gray-600 text-sm mb-4 line-clamp-3">${product.description}</p>
+                <!-- Title -->
+                <h3 class="product-title">${product.title}</h3>
                 
-                <div class="flex items-center justify-between mb-4">
-                    <div class="flex items-center text-yellow-500">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <span class="ml-1 text-gray-600 text-sm">(4.8)</span>
+                <!-- Description -->
+                <p class="product-description">${product.description}</p>
+                
+                <!-- Price & Status -->
+                <div class="price-section">
+                    <div class="price-tag">${formatCurrency(product.price)}</div>
+                    <div class="status-badge ${product.status === 'active' ? 'available' : 'unavailable'}">
+                        ${product.status === 'active' ? 'Có sẵn' : 'Tạm hết'}
                     </div>
-                    <span class="text-2xl font-bold text-teal-600">${formatCurrency(product.price)}</span>
                 </div>
                 
-                <div class="flex items-center space-x-2">
-                    <button 
-                        onclick="viewProduct('${product.id}')"
-                        class="flex-1 bg-gradient-to-r from-teal-500 to-purple-600 text-white py-2 px-4 rounded-lg hover:from-teal-600 hover:to-purple-700 transition-all duration-200 shadow-md hover:shadow-lg"
-                    >
-                        <i class="fas fa-eye mr-2"></i>
-                        Xem chi tiết
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button onclick="event.stopPropagation(); viewProduct('${product.id}')" 
+                            class="btn-primary">
+                        <i class="fas fa-eye"></i>
+                        Chi tiết
                     </button>
-                    
-                    <button 
-                        onclick="toggleWishlistItem('${product.id}')"
-                        class="w-10 h-10 ${isInWishlist ? 'bg-red-500 text-white' : 'bg-gray-200 text-gray-600 hover:bg-red-100 hover:text-red-600'} rounded-lg transition-colors"
-                        title="${isInWishlist ? 'Bỏ yêu thích' : 'Thêm yêu thích'}"
-                    >
-                        <i class="fas fa-heart"></i>
+                    <button onclick="event.stopPropagation(); addToCart('${product.id}')" 
+                            class="btn-secondary">
+                        <i class="fas fa-shopping-cart"></i>
                     </button>
+                </div>
                     
                     <button 
                         onclick="toggleCartItem('${product.id}')"
@@ -232,7 +240,6 @@ function renderProductCard(product) {
                     >
                         <i class="fas fa-shopping-cart"></i>
                     </button>
-                </div>
             </div>
         </div>
     `;

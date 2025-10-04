@@ -1,0 +1,42 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "🚀 Quick Start",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/quick-start.bat",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "skipFiles": ["<node_internals>/**"]
+        },
+        {
+            "name": "🎯 Full Stack",
+            "type": "node", 
+            "request": "launch",
+            "program": "${workspaceFolder}/start-full-stack.bat",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "skipFiles": ["<node_internals>/**"]
+        },
+        {
+            "name": "🗄️ Backend Server",
+            "type": "node",
+            "request": "launch", 
+            "program": "${workspaceFolder}/backend/test-server.js",
+            "console": "integratedTerminal",
+            "internalConsoleFiles": "neverOpen",
+            "skipFiles": ["<node_internals>/**"]
+        },
+        {
+            "name": "🔧 Frontend Dev",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": ["run", "dev"],
+            "console": "integratedTerminal", 
+            "internalConsoleOptions": "neverOpen",
+            "skipFiles": ["<node_internals>/**"]
+        }
+    ]
+}

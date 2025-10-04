@@ -21,9 +21,13 @@ function initializeAuth() {
     loadingOverlay = document.getElementById('loadingOverlay');
     togglePasswordBtn = document.getElementById('togglePassword');
 
-    // Event listeners
-    loginForm.addEventListener('submit', handleLogin);
-    togglePasswordBtn.addEventListener('click', togglePassword);
+    // Event listeners (with null checks)
+    if (loginForm) {
+        loginForm.addEventListener('submit', handleLogin);
+    }
+    if (togglePasswordBtn) {
+        togglePasswordBtn.addEventListener('click', togglePassword);
+    }
 
     // Initialize if already logged in
     checkAuthStatus();
@@ -95,16 +99,22 @@ async function handleLogin(e) {
 
 // Toggle password visibility
 function togglePassword() {
+    if (!passwordInput || !togglePasswordBtn) return;
+    
     const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
     passwordInput.setAttribute('type', type);
     
     const icon = togglePasswordBtn.querySelector('i');
-    icon.classList.toggle('fa-eye');
-    icon.classList.toggle('fa-eye-slash');
+    if (icon) {
+        icon.classList.toggle('fa-eye');
+        icon.classList.toggle('fa-eye-slash');
+    }
 }
 
 // Show loading overlay
 function showLoading(show) {
+    if (!loadingOverlay || !loginBtn) return;
+    
     if (show) {
         loadingOverlay.classList.remove('hidden');
         loginBtn.disabled = true;
@@ -118,9 +128,11 @@ function showLoading(show) {
 
 // Show error message
 function showError(message) {
+    if (!errorMessage) return;
+    
     errorMessage.querySelector('#errorText').textContent = message;
     errorMessage.classList.remove('hidden');
-    successMessage.classList.add('hidden');
+    if (successMessage) successMessage.classList.add('hidden');
     
     // Auto hide after 5 seconds
     setTimeout(() => {
@@ -130,18 +142,22 @@ function showError(message) {
 
 // Show success message
 function showSuccess(message) {
+    if (!successMessage) return;
+    
     successMessage.querySelector('#successText').textContent = message;
     successMessage.classList.remove('hidden');
 }
 
 // Hide all messages
 function hideMessages() {
-    errorMessage.classList.add('hidden') ;
-    successMessage.classList.add('hidden');
+    if (errorMessage) errorMessage.classList.add('hidden');
+    if (successMessage) successMessage.classList.add('hidden');
 }
 
 // Fill login form with demo credentials
 function fillLoginForm(email, password) {
+    if (!emailInput || !passwordInput) return;
+    
     emailInput.value = email;
     passwordInput.value = password;
     hideMessages();

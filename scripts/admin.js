@@ -7,7 +7,8 @@ let selectedCategory = '';
 let selectedStatus = '';
 let searchQuery = '';
 
-const API_BASE = 'http://localhost:3000/api';
+// API_BASE is already defined globally from auth.js
+// const API_BASE = 'http://localhost:3000/api';
 
 document.addEventListener('DOMContentLoaded', function() {
     checkAuth();

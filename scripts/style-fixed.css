@@ -1,0 +1,152 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Critical base styles */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Custom component styles */
+@layer components {
+  .btn-primary {
+    @apply bg-teal-500 text-white px-6 py-3 rounded-lg hover:bg-teal-600 transition-colors font-medium shadow-lg hover:shadow-xl;
+  }
+  
+  .card {
+    @apply bg-white rounded-xl shadow-md p-6 border border-gray-100 hover:shadow-lg transition-shadow;
+  }
+  
+  .navbar {
+    @apply bg-white shadow-sm border-b border-gray-200 px-4 py-3;
+  }
+  
+  .product-card {
+    @apply bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border border-gray-100;
+  }
+  
+  .search-bar {
+    @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none;
+  }
+  
+  .category-filter {
+    @apply px-3 py-1 rounded-full text-sm text-gray-600 bg-gray-100 hover:bg-teal-100 hover:text-teal-700 cursor-pointer transition-colors;
+  }
+  
+  .category-filter.active {
+    @apply bg-teal-500 text-white hover:bg-teal-600;
+  }
+}
+
+/* Critical layout */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.grid-responsive {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 0.5rem;
+  }
+  
+  .grid-responsive {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+/* Animation utilities */
+@layer utilities {
+  .animate-fadeIn {
+    animation: fadeIn 0.5초 ease-in;
+  }
+  
+  .animate-slideUp {
+    animation: slideUp 0.5초 ease-out;
+  }
+  
+  .hover-lift {
+    transition: transform 0.3초 ease;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #20b2aa;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #17a199;
+}
+
+/* FontAwesome icons compatibility */
+.fas, .far, .fab {
+  vertical-align: middle;
+}
+
+/* Form elements */
+input[type="search"] {
+  @apply search-bar;
+}
+
+button[type="submit"] {
+  @apply btn-primary;
+}
+
+/* Product-specific styles */
+.product-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background: #f8f9fa;
+}
+
+.price-tag {
+  @apply text-lg font-bold text-teal-600;
+}
+
+.rating-stars {
+  @apply text-yellow-400;
+}
+
+/* Loading spinner */
+.spinner {
+  @apply animate-spin rounded-full h-6 w-6 border-b-2 border-teal-500;
+}

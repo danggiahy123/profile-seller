@@ -7,17 +7,32 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "server": "node backend/server.js",
-    "server:dev": "nodemon backend/server.js",
-    "start": "concurrently \"npm run dev\" \"npm run server\""
+    "server": "node backend/test-server.js",
+    "server:dev": "nodemon backend/test-server.js",
+    "start": "concurrently \"npm run build:css && node backend/test-server.js\" \"npm run dev\"",
+    "build:css": "tailwindcss -i ./scripts/style-optimized.css -o ./scripts/style-bundled.css --config ./config/tailwind.config.js -m",
+    "watch:css": "tailwindcss -i ./scripts/style-optimized.css -o ./scripts/style-bundled.css --config ./config/tailwind.config.js --watch"
   },
-  "keywords": ["admin", "web", "tailwindcss"],
+  "keywords": [
+    "admin",
+    "web",
+    "tailwindcss"
+  ],
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "vite": "^5.0.0",
-    "tailwindcss": "^3.3.0",
-    "autoprefixer": "^10.4.16",
-    "postcss": "^8.4.31"
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.18",
+    "vite": "^5.4.20"
+  },
+  "dependencies": {
+    "concurrently": "^9.2.1",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "mongodb": "^6.20.0",
+    "mongoose": "^8.19.0",
+    "nodemon": "^3.1.10"
   }
 }
