@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liên Hệ - Dang Gia Hy | Portfolio & Development Services</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📱</text></svg>">
+    
+    <meta name="description" content="Liên hệ với Dang Gia Hy để được tư vấn về phát triển web và mobile app. Email, Zalo, Facebook và các kênh liên lạc khác.">
+    
+    <style>
+        :root {
+            --ocean-primary: #0077be;
+            --ocean-light: #4facfe;
+            --text-primary: #2c3e50;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #f8feff 0%, #e8f8ff 50%, #d4f1ff 100%);
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 280px;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);
+            backdrop-filter: blur(20px);
+            border-right: 2px solid rgba(79, 172, 254, 0.2);
+            z-index: 900;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 10px 0 30px rgba(79, 172, 254, 0.2);
+        }
+
+        .header-container {
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(79, 172, 254, 0.5) transparent;
+        }
+
+        .logo-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .avatar-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(79, 172, 254, 0.4));
+            border: 3px solid rgba(79, 172, 254, 0.3);
+            object-fit: cover;
+        }
+
+        .logo-text-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2c3e50;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        .dev-name {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #667eea;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        .main-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            flex-grow: 1;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: #2c3e50;
+            text-decoration: none;
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            background: rgba(79, 172, 254, 0.05);
+            border: 1px solid rgba(79, 172, 254, 0.2);
+            font-weight: 500;
+            font-size: 1rem;
+            position: relative;
+            overflow: visible;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item.active {
+            background: rgba(79, 172, 254, 0.15);
+            color: #0077be;
+        }
+
+        .nav-item:hover {
+            background: rgba(79, 172, 254, 0.15);
+            transform: translateX(10px);
+            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.3);
+        }
+
+        .nav-item i {
+            font-size: 1.2rem;
+            color: #667eea;
+            min-width: 20px;
+        }
+
+        .nav-item.active i {
+            color: #0077be;
+        }
+
+        .hot-ribbon {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: linear-gradient(45deg, #ff4757, #ff6348);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.3rem 0.6rem;
+            border-radius: 12px;
+            transform: rotate(15deg);
+            box-shadow: 0 3px 10px rgba(255, 71, 87, 0.4);
+            z-index: 10;
+        }
+
+        .auth-section {
+            margin: 0.5rem 0 1rem 0;
+            padding: 1rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            border-bottom: 1px solid rgba(79, 172, 254, 0.2);
+        }
+
+        .auth-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+            padding: 0.8rem 1rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            background: rgba(79, 172, 254, 0.1);
+            color: #4facfe;
+            border: 1px solid rgba(79, 172, 254, 0.3);
+            width: 100%;
+            justify-content: center;
+        }
+
+        .auth-btn:hover {
+            background: rgba(79, 172, 254, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(79, 172, 254, 0.3);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 280px;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .content-section {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Page Indicator */
+        .page-indicator {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 15px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .breadcrumb {
+            color: #667eea;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .page-type {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-info {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-info h2 {
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem;
+            background: rgba(79, 172, 254, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(79, 172, 254, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .contact-method:hover {
+            background: rgba(79, 172, 254, 0.1);
+            transform: translateX(5px);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .contact-icon.email { background: linear-gradient(135deg, #ea4335, #dc3545); }
+        .contact-icon.phone { background: linear-gradient(135deg, #25d366, #128c7e); }
+        .contact-icon.zalo { background: linear-gradient(135deg, #0068ff, #004bb5); }
+        .contact-icon.facebook { background: linear-gradient(135deg, #1877f2, #0d47a1); }
+
+        .contact-details h3 {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+
+
+        }
+
+        .contact-details p {
+            color: #666;
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-details a {
+            color: #4facfe;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-details a:hover {
+            color: #0077be;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form h2 {
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid rgba(79, 172, 254, 0.3);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #4facfe;
+            box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #4facfe, #0077be);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.3);
+        }
+
+        /* Quick Contact */
+        .quick-contact {
+            background: linear-gradient(135deg, rgba(79, 172, 254, 0.1), rgba(0, 119, 190, 0.1));
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .quick-contact h2 {
+            font-size: 2rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .quick-contact p {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .quick-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .quick-btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quick-btn.zalo {
+            background: linear-gradient(135deg, #0068ff, #004bb5);
+            color: white;
+        }
+
+        .quick-btn.whatsapp {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+        }
+
+        .quick-btn: hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .main-header {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+    </style>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <div class="main-header">
+        <div class="header-container">
+            <div class="logo-section">
+                <img src="https://avatars.githubusercontent.com/u/52559821?s=400&u=31cc3a0a326c0243768ca042471bc6b735f415f2&v=4" alt="Avatar" class="avatar-img">
+                <div class="logo-text-container">
+                    <span class="logo-text">waterdg</span>
+                    <span class="dev-name">Dang Gia Hy</span>
+                </div>
+            </div>
+            
+            <nav class="main-nav">
+                <a href="../index.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Giới thiệu</span>
+                </a>
+                <a href="web-mau.html" class="nav-item">
+                    <i class="fas fa-globe"></i>
+                    <span>Web mẫu</span>
+                </a>
+                <a href="products.html" class="nav-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>Mobile app mẫu</span>
+                </a>
+                <a href="portfolio.html" class="nav-item">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Portfolio mẫu</span>
+                </a>
+                <a href="#lien-he" class="nav-item active">
+                    <i class="fas fa-envelope"></i>
+                    <span>Liên hệ</span>
+                </a>
+                <a href="#cam-ket" class="nav-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Cam kết</span>
+                </a>
+            </nav>
+            
+            <div class="auth-section">
+                <a href="login.html" class="auth-btn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Đăng nhập</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="content-section">
+            
+            <!-- Page Indicator -->
+            <div class="page-indicator">
+                <span class="breadcrumb">📍 Trang chủ • Liên hệ</span>
+                <div class="page-type">CONTACT ME</div>
+            </div>
+
+            <!-- Quick Contact -->
+            <div class="quick-contact">
+                <h2>💬 Liên hệ ngay!</h2>
+                <p>Tôi luôn sẵn sàng tư vấn và hỗ trợ bạn về các dự án web và mobile app</p>
+                <div class="quick-buttons">
+                    <a href="https://zalo.me/123456789" class="quick-btn zalo">
+                        <i class="fas fa-comment-dots"></i>
+                        <span>Chat Zalo</span>
+                    </a>
+                    <a href="https://wa.me/123456789" class="quick-btn whatsapp">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>WhatsApp</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Contact Grid -->
+            <div class="contact-grid">
+                <!-- Contact Information -->
+                <div class="contact-info">
+                    <h2>📲 Thông tin liên hệ</h2>
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <div class="contact-icon email">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>Email</h3>
+                                <p>Liên hệ qua email</p>
+                                <a href="mailto:waterdg.dev@gmail.com">waterdg.dev@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-method">
+                            <div class="contact-icon phone">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>Điện thoại</h3>
+                                <p>Gọi trực tiếp là cách nhanh nhất</p>
+                                <a href="tel:+84123456789">+84 123 456 789</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-method">
+                            <div class="contact-icon zalo">
+                                <i class="fab fa-facebook-messenger"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>Zalo</h3>
+                                <p>Chat qua Zalo với phản hồi nhanh</p>
+                                <a href="https://zalo.me/123456789">Chat ngay</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-method">
+                            <div class="contact-icon facebook">
+                                <i class="fab fa-facebook"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>Facebook</h3>
+                                <p>Kết nối trên Facebook</p>
+                                <a href="https://facebook.com/user.profile">facebook.com/user.profile</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="contact-form">
+                    <h2>📝 Gửi tin nhắn</h2>
+                    <form action="#" method="POST">
+                        <div class="form-group">
+                            <label for="name">Họ và tên *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Số điện thoại</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="service">Loại dịch vụ quan tâm</label>
+                            <select id="service" name="service">
+                                <option value="">Chọn dịch vụ...</option>
+                                <option value="web-dev">Web Development</option>
+                                <option value="mobile-app">Mobile App</option>
+                                <option value="consulting">Consulting</option>
+                                <option value="other">Khác</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Tin nhắn *</label>
+                            <textarea id="message" name="message" placeholder="Mô tả chi tiết về dự án hoặc yêu cầu của bạn..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            <span>Gửi tin nhắn</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

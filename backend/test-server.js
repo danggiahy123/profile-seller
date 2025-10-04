@@ -32,7 +32,7 @@ app.post('/api/auth/login', (req, res) => {
             user: {
                 id: '507f1f77bcf86cd799439011',
                 email: 'admin@profile-seller.com',
-                name: 'Admin User',
+                name: 'Portfolio Manager',
                 role: 'admin'
             },
             token: 'mock_token_admin_' + Date.now()
@@ -46,7 +46,7 @@ app.post('/api/auth/login', (req, res) => {
                 name: 'Regular User',
                 role: 'user'
             },
-            token: 'mock_token_user_' + Date.now()
+            token: 'mock_token_dev_' + Date.now()
         });
     } else {
         res.status(401).json({
@@ -98,40 +98,49 @@ app.get('/api/auth/profile', (req, res) => {
     }
 });
 
-// Mock products endpoints
+// Mock portfolio endpoints
 app.get('/api/profiles', (req, res) => {
-    const mockProducts = [
+    const mockProjects = [
         {
             id: '1',
-            title: 'Modern Website Design',
-            description: 'Thiết kế website hiện đại với responsive design',
-            price: 1500000,
-            status: 'active',
-            category: 'design',
-            tags: ['web', 'design', 'responsive'],
-            sellerId: '507f1f77bcf86cd799439011',
+            title: 'Food Delivery Mobile App',
+            description: 'Ứng dụng đặt đồ ăn online với React Native và Firebase',
+            status: 'completed',
+            category: 'mobile',
+            tags: ['react-native', 'firebase', 'android', 'ios'],
+            techStack: ['React Native', 'Firebase', 'Redux', 'Google Maps'],
+            demoUrls: ['github.com/user/food-app', 'expo.dev/food-delivery'],
+            rating: 4.8,
+            downloads: 1200,
+            developerId: '507f1f77bcf86cd799439011',
             createdAt: new Date().toISOString()
         },
         {
             id: '2',
-            title: 'E-commerce App Development',
-            description: 'Ứng dụng mua sắm trực tuyến với đầy đủ tính năng',
-            price: 5000000,
+            title: 'AI ChatBot Web App',
+            description: 'Website chat với AI tích hợp OpenAI GPT và socket.io',
             status: 'active',
-            category: 'development',
-            tags: ['react', 'nodejs', 'mongodb'],
-            sellerId: '507f1f77bcf86cd799439011',
+            category: 'web',
+            tags: ['ai', 'chatbot', 'openai', 'nodejs'],
+            techStack: ['React', 'Node.js', 'OpenAI API', 'Socket.io'],
+            demoUrls: ['github.com/user/ai-chat', 'ai-chat.vercel.app'],
+            rating: 4.9,
+            users: 560,
+            developerId: '507f1f77bcf86cd799439011',
             createdAt: new Date().toISOString()
         },
         {
             id: '3',
-            title: 'Social Media Marketing',
-            description: 'Chiến lược marketing trên các nền tảng mạng xã hội',
-            price: 3000000,
-            status: 'active',
-            category: 'marketing',
-            tags: ['facebook', 'instagram', 'marketing'],
-            sellerId: '507f1f77bcf86cd799439012',
+            title: 'Đồ án IoT Smart Home',
+            description: 'Hệ thống nhà thông minh với Arduino và web dashboard',
+            status: 'prototype',
+            category: 'iot',
+            tags: ['arduino', 'iot', 'smart-home', 'dashboard'],
+            techStack: ['Arduino', 'ESP32', 'React', 'WebSocket'],
+            demoUrls: ['github.com/user/smart-home', 'smart-home.demo.com'],
+            rating: 4.7,
+            views: 890,
+            developerId: '507f1f77bcf86cd799439012',
             createdAt: new Date().toISOString()
         }
     ];
@@ -139,13 +148,13 @@ app.get('/api/profiles', (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 10;
     
-    const total = mockProducts.length;
+    const total = mockProjects.length;
     const startIndex = (page - 1) * limit;
     const endIndex = startIndex + limit;
-    const paginatedProducts = mockProducts.slice(startIndex, endIndex);
+    const paginatedProjects = mockProjects.slice(startIndex, endIndex);
     
     res.json({
-        profiles: paginatedProducts,
+        projects: paginatedProjects,
         pagination: {
             page,
             limit,
@@ -229,12 +238,12 @@ app.get('/api/health', (req, res) => {
 
 const PORT = 3000;
 app.listen(PORT, () => {
-    console.log('\n🚀 Mock Backend Server đã khởi động!');
+    console.log('\n🚀 Portfolio Hub Backend Server đã khởi động!');
     console.log('📡 Server Info:');
     console.log(`   🌐 URL: http://localhost:${PORT}`);
     console.log(`   📡 Health: http://localhost:${PORT}/api/health`);
     console.log(`   🔐 Auth: http://localhost:${PORT}/api/auth/login`);
-    console.log(`   🛍️ Products: http://localhost:${PORT}/api/profiles`);
+    console.log(`   📱 Portfolio: http://localhost:${PORT}/api/profiles`);
     console.log(`   ⚙️ Environment: development`);
     console.log(`   🕐 Started: ${new Date().toISOString()}`);
     console.log('\n📝 Demo Accounts:');

@@ -3,269 +3,829 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sản phẩm - Profile Seller</title>
+    <title>Portfolio Marketplace - Premium Projects</title>
     <link href="../scripts/style.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../scripts/ocean-theme.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --dark-bg: #0a0a0a;
+            --card-bg: rgba(20, 20, 20, 0.9);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --gradient-orange: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            --gradient-blue: linear-gradient(135deg, #0077be 0%, #00a5ff 100%);
+            --gradient-green: linear-gradient(135deg, #00b894 0%, #00ce84 100%);
+            --gradient-purple: linear-gradient(135deg, #a855f7 0%, #c084fc 100%);
+            --gradient-red: linear-gradient(135deg, #ef4444 0%, #f87171 100%);
+            --gradient-yellow: linear-gradient(135deg, #fbbf24 0%, #fcd34d 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        /* Animated Background Pattern */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.03;
+            background-image: 
+                radial-gradient(circle at 25% 25%, #0077be 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, #a855f7 0%, transparent 50%);
+            animation: backgroundMove 20s ease-in-out infinite;
+        }
+
+        @keyframes backgroundMove {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(2deg); }
+        }
+
+        /* Header */
+        .header {
+            background: rgba(20, 20, 20, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--card-border);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-blue);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 119, 190, 0.3);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #ffffff, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .search-container {
+            position: relative;
+        }
+
+        .search-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 0.75rem 1rem 0.75rem 3rem;
+            color: var(--text-primary);
+            width: 300px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #0077be;
+            box-shadow: 0 0 0 3px rgba(0, 119, 190, 0.2);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 0.75rem 1.5rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #0077be;
+            transform: translateY(-2px);
+        }
+
+        /* Login Prompt Styling */
+        .login-prompt {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .login-hint {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+            animation: pulse-hint 2s ease-in-out infinite;
+        }
+
+        .hint-text {
+            font-size: 0.8rem;
+            color: #ffd700;
+            font-weight: 600;
+            white-space: nowrap;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .arrow-down {
+            font-size: 1rem;
+            color: #ffd700;
+            animation: bounce-arrow 1.5s ease-in-out infinite;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+
+        .login-btn-premium {
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ffd700 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 15px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .login-btn-premium::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .login-btn-premium:hover::before {
+            left: 100%;
+        }
+
+        .login-btn-premium:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(255, 107, 53, 0.6);
+            border-color: rgba(255, 215, 0, 0.8);
+        }
+
+        .login-btn-premium:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+
+        .login-btn-premium i {
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+        }
+
+        /* Animations */
+        @keyframes pulse-hint {
+            0%, 100% { 
+                opacity: 0.8; 
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 1; 
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes bounce-arrow {
+            0%, 100% { 
+                transform: translateY(0);
+            }
+            50% { 
+                transform: translateY(-3px);
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(0, 119, 190, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffffff 0%, #00a5ff 50%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Marketplace Grid */
+        .marketplace {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffffff, #0077be);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-title p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        /* Project Card */
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            backdrop-filter: blur(20px);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 2px;
+            background: var(--card-gradient);
+            border-radius: inherit;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .card-image {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-badges {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            right: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .badge {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+
+        .badge-version {
+            background: rgba(168, 85, 247, 0.8);
+        }
+
+        .card-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 2;
+        }
+
+        .card-main-text {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+        }
+
+        .card-sub-text {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            font-weight: 600;
+        }
+
+        .card-content {
+            padding: 2rem;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, #ffffff, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .card-category {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+
+        .card-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0077be;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-primary {
+            flex: 1;
+            background: var(--gradient-blue);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0, 119, 190, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0, 119, 190, 0.4);
+        }
+
+        .btn-secondary {
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            color: var(--text-primary);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Enhanced Responsive Design */
+        @media (max-width: 1200px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .marketplace {
+                padding: 1.5rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .nav-actions {
+                justify-content: space-between;
+                width: 100%;
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .search-container {
+                order: 1;
+                flex: 1;
+                min-width: 250px;
+            }
+
+            .search-input {
+                width: 100%;
+            }
+
+            .nav-btn {
+                order: 2;
+            }
+
+            .login-prompt {
+                order: 3;
+                align-self: stretch;
+                text-align: center;
+            }
+
+            .hint-text {
+                font-size: 0.8rem;
+            }
+
+            .login-btn-premium {
+                padding: 0.6rem 1rem;
+                font-size: 0.8rem;
+                text-align: center;
+            }
+            
+            .marketplace {
+                padding: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .section-title p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+            
+            .nav-actions {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .search-container {
+                order: 1;
+                width: 100%;
+            }
+            
+            .nav-btn {
+                order: 2;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .login-prompt {
+                order: 3;
+                width: 100%;
+            }
+            
+            .login-hint {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .arrow-down {
+                order: -1;
+            }
+            
+            .projects-grid {
+                gap: 1rem;
+            }
+            
+            .project-card {
+                margin-bottom: 1rem;
+            }
+            
+            .card-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .stat {
+                padding: 0.5rem;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 8px;
+            }
+            
+            .card-actions {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            /* Improve modal responsiveness */
+            #projectModal .bg-gray-900 {
+                width: 95%;
+                margin: 1rem;
+                max-height: 95vh;
+            }
+            
+            #projectModal .grid-cols-1.md\\:grid-cols-2 {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .tech-icons {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 0.5rem;
+            }
+        }
+    </style>
 </head>
-<body class="bg-gray-100 font-sans">
+<body>
+    <!-- Animated Background -->
+    <div class="bg-pattern"></div>
+
     <!-- Header -->
-    <header class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-40">
-        <div class="max-w-7xl mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-4">
-                    <div class="w-10 h-10 bg-gradient-to-br from-teal-500 to-purple-600 rounded-lg flex items-center justify-center">
-                        <i class="fas fa-store text-white"></i>
-                    </div>
-                    <div>
-                        <h1 class="text-xl font-bold text-gray-900">Profile Seller</h1>
-                        <p class="text-gray-600 text-sm">Cửa hàng sản phẩm</p>
-                    </div>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo-icon">📱</div>
+                <div class="logo-text">
+                    <div class="logo-title">Portfolio Hub</div>
+                    <div class="logo-subtitle">Premium Projects Marketplace</div>
                 </div>
+            </div>
+            
+            <div class="nav-actions">
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" placeholder="Tìm kiếm dự án..." id="searchInput">
+                </div>
+                <a href="../index.html" class="nav-btn">
+                    <i class="fas fa-home mr-2"></i>
+                    Trang chủ
+                </a>
                 
-                <div class="flex items-center space-x-4">
-                    <div class="text-right" id="userInfo">
-                        <!-- Will be populated by auth check -->
+                <!-- Login Prompt -->
+                <div class="login-prompt">
+                    <div class="login-hint">
+                        <span class="hint-text">Bạn muốn mua sản phẩm?</span>
+                        <span class="arrow-down">↓</span>
                     </div>
-                    
-                    <div class="flex items-center space-x-2">
-                        <button onclick="toggleWishlist()" id="wishlistBtn" class="relative flex items-center px-3 py-2 text-sm text-gray-600 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors">
-                            <i class="fas fa-heart mr-2"></i>
-                            Yêu thích
-                            <span id="wishlistCount" class="ml-2 bg-red-500 text-white text-xs rounded-full px-2 py-1">0</span>
-                        </button>
-                        
-                        <button onclick="toggleCart()" id="cartBtn" class="relative flex items-center px-3 py-2 text-sm text-gray-600 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors">
-                            <i class="fas fa-shopping-cart mr-2"></i>
-                            Giỏ hàng
-                            <span id="cartCount" class="ml-2 bg-teal-500 text-white text-xs rounded-full px-2 py-1">0</span>
-                        </button>
-                        
-                        <div id="authButtons" class="flex items-center space-x-2">
-                            <!-- Will show login/admin buttons based on auth status -->
-                        </div>
-                    </div>
+                    <a href="../pages/login.html" class="login-btn-premium">
+                        <i class="fas fa-sign-in-alt mr-2"></i>
+                        Đăng nhập ngay
+                    </a>
                 </div>
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-teal-500 to-purple-600 text-white py-16">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <h2 class="text-4xl font-bold mb-4">Khám phá sản phẩm tuyệt vời</h2>
-            <p class="text-xl text-teal-100 mb-8">Chúng tôi mang đến những sản phẩm chất lượng cao với giá cả hợp lý</p>
-            
-            <!-- Search Bar -->
-            <div class="max-w-2xl mx-auto">
-                <div class="relative">
-                    <input 
-                        type="text" 
-                        id="heroSearchInput"
-                        placeholder="Tìm kiếm sản phẩm nào bạn muốn..."
-                        class="w-full px-6 py-4 pr-12 text-gray-900 rounded-lg focus:ring-2 focus:ring-white focus:border-transparent text-lg"
-                    >
-                    <button id="heroSearchBtn" class="absolute right-3 top-3 bg-teal-500 text-white px-6 py-2 rounded-lg hover:bg-teal-600 transition-colors">
-                        <i class="fas fa-search mr-2"></i>
-                        Tìm kiếm
-                    </button>
-                </div>
-            </div>
+    <section class="hero">
+        <h1 class="hero-title">Premium Projects Portfolio</h1>
+        <p class="hero-subtitle">Khám phá những dự án cá nhân và mobile app chất lượng cao từ các developer tài năng</p>
+    </section>
+
+    <!-- Marketplace Section -->
+    <section class="marketplace">
+        <div class="section-title">
+            <h2>🚀 Mobile Apps & Đồ án</h2>
+            <p>Những dự án mobile app và đồ án tốt nghiệp được thiết kế chuyên nghiệp</p>
+        </div>
+
+        <div class="projects-grid" id="projectsGrid">
+            <!-- Projects will be loaded here -->
         </div>
     </section>
 
-    <!-- Filters & Categories -->
-    <section class="bg-white py-6 border-b border-gray-200 sticky top-16 z-30">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex items-center justify-between flex-wrap">
-                <!-- Categories -->
-                <div class="flex items-center space-x-4 mb-4 md:mb-0">
-                    <span class="text-sm font-medium text-gray-700">Danh mục:</span>
-                    <div class="flex items-center space-x-2">
-                        <button onclick="setCategory('')" class="category-btn px-3 py-1 bg-teal-500 text-white rounded-full text-sm">Tất cả</button>
-                        <button onclick="setCategory('design')" class="category-btn px-3 py-1 bg-white text-gray-700 border border-gray-300 rounded-full text-sm hover:bg-gray-50">Design</button>
-                        <button onclick="setCategory('development')" class="category-btn px-3 py-1 bg-white text-gray-700 border border-gray-300 rounded-full text-sm hover:bg-gray-50">Development</button>
-                        <button onclick="setCategory('marketing')" class="category-btn px-3 py-1 bg-white text-gray-700 border border-gray-300 rounded-full text-sm hover:bg-gray-50">Marketing</button>
-                        <button onclick="setCategory('photo')" class="category-btn px-3 py-1 bg-white text-gray-700 border border-gray-300 rounded-full text-sm hover:bg-gray-50">Photography</button>
-                    </div>
-                </div>
-                
-                <!-- Sort & View -->
-                <div class="flex items-center space-x-4">
-                    <select id="sortSelect" class="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent text-sm">
-                        <option value="newest">Mới nhất</option>
-                        <option value="price-asc">Giá tăng dần</option>
-                        <option value="price-desc">Giá giảm dần</option>
-                        <option value="popular">Phổ biến</option>
-                    </select>
-                    
-                    <div class="flex items-center space-x-1">
-                        <button onclick="setViewMode('grid')" id="gridViewBtn" class="p-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors">
-                            <i class="fas fa-th"></i>
-                        </button>
-                        <button onclick="setViewMode('list')" id="listViewBtn" class="p-2 bg-white text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
-                            <i class="fas fa-list"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Loading State -->
+    <div id="loadingState" class="text-center py-16">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
+        <p class="text-gray-400">Đang tải dự án...</p>
+    </div>
 
-    <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-6 py-8">
-        <!-- Loading State -->
-        <div id="loadingState" class="text-center py-16">
-            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-500 mx-auto mb-4"></div>
-            <p class="text-gray-600">Đang tải sản phẩm...</p>
-        </div>
+    <!-- Empty State -->
+    <div id="emptyState" class="hidden text-center py-16">
+        <i class="fas fa-search text-6xl text-gray-500 mb-6"></i>
+        <h3 class="text-2xl font-bold text-white mb-4">Không tìm thấy dự án</h3>
+        <p class="text-gray-400 mb-8">Hãy thử tìm kiếm với từ khóa khác</p>
+        <button onclick="loadProjects()" class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-lg hover:shadow-lg transition-all">
+            <i class="fas fa-refresh mr-2"></i>
+            Làm mới
+        </button>
+    </div>
 
-        <!-- Products Grid -->
-        <div id="productsContainer" class="hidden">
-            <!-- Products will be rendered here -->
-        </div>
-
-        <!-- Empty State -->
-        <div id="emptyState" class="hidden text-center py-16">
-            <i class="fas fa-search text-6xl text-gray-300 mb-6"></i>
-            <h3 class="text-2xl font-bold text-gray-900 mb-4">Không tìm thấy sản phẩm</h3>
-            <p class="text-gray-600 mb-8">Hãy thử tìm kiếm với từ khóa khác hoặc duyệt theo danh mục</p>
-            <button onclick="clearFilters()" class="bg-teal-500 text-white px-6 py-3 rounded-lg hover:bg-teal-600 transition-colors">
-                <i class="fas fa-refresh mr-2"></i>
-                Xóa bộ lọc
-            </button>
-        </div>
-
-        <!-- Pagination -->
-        <div id="pagination" class="mt-12 flex items-center justify-center">
-            <div class="flex items-center space-x-2">
-                <button id="prevPage" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <div id="pageNumbers" class="flex space-x-1"></div>
-                <button id="nextPage" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12 mt-16">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div>
-                    <h3 class="text-xl font-bold mb-4">Profile Seller</h3>
-                    <p class="text-gray-400 mb-4">Nền tảng mua bán sản phẩm số uy tín và chất lượng cao.</p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                            <i class="fab fa-facebook text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                            <i class="fab fa-twitter text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                            <i class="fab fa-instagram text-xl"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Liên kết</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Về chúng tôi</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Điều khoản sử dụng</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Chính sách bảo mật</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Liên hệ</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Hỗ trợ</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Trung tâm trợ giúp</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Câu hỏi thường gặp</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Hướng dẫn mua hàng</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Phản hồi</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2024 Profile Seller. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Product Detail Modal -->
-    <div id="productModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-lg shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+    <!-- Project Detail Modal -->
+    <div id="projectModal" class="hidden fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4">
+        <div class="bg-gray-900 rounded-lg shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto border border-gray-700">
             <div class="p-8">
                 <div class="flex items-start justify-between mb-6">
                     <div class="flex-1">
-                        <h2 id="modalProductTitle" class="text-3xl font-bold text-gray-900 mb-2"></h2>
+                        <h2 id="modalProjectTitle" class="text-3xl font-bold text-white mb-2"></h2>
                         <div class="flex items-center space-x-4 mb-4">
-                            <span id="modalProductPrice" class="text-2xl font-bold text-teal-600"></span>
-                            <span id="modalProductCategory" class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm"></span>
+                            <span id="modalProjectCategory" class="px-3 py-1 bg-purple-500 text-white rounded-full text-sm"></span>
                             <div class="flex items-center text-yellow-500">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
-                                <span class="ml-1 text-gray-600 text-sm">(4.8)</span>
+                                <span id="modalProjectRating" class="ml-1 text-gray-400 text-sm"></span>
                             </div>
                         </div>
                     </div>
-                    <button onclick="closeProductModal()" class="text-gray-400 hover:text-gray-600">
+                    <button onclick="closeProjectModal()" class="text-gray-400 hover:text-white">
                         <i class="fas fa-times text-2xl"></i>
                     </button>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
-                        <div class="aspect-square bg-gray-100 rounded-lg mb-4 flex items-center justify-center">
-                            <i class="fas fa-image text-6xl text-gray-400"></i>
+                        <div class="aspect-video bg-gray-800 rounded-lg mb-4 flex items-center justify-center">
+                            <i class="fas fa-image text-6xl text-gray-600"></i>
                         </div>
-                        <p id="modalProductDescription" class="text-gray-700 mb-6"></p>
+                        <p id="modalProjectDescription" class="text-gray-300 mb-6"></p>
                         <div class="mb-6">
-                            <h4 class="font-semibold text-gray-900 mb-2">Nội dung bao gồm:</h4>
-                            <div id="modalProductContent" class="text-gray-700 bg-gray-50 p-4 rounded-lg"></div>
+                            <h4 class="font-semibold text-white mb-2">Tech Stack:</h4>
+                            <div id="modalProjectTech" class="text-gray-300 bg-gray-800 p-4 rounded-lg"></div>
+                        </div>
+                        <div class="mb-6">
+                            <h4 class="font-semibold text-white mb-2">Demo Links:</h4>
+                            <div id="modalProjectLinks" class="text-gray-300 bg-gray-800 p-4 rounded-lg"></div>
                         </div>
                     </div>
                     
                     <div>
-                        <div class="bg-gray-50 p-6 rounded-lg">
-                            <h4 class="text-lg font-semibold text-gray-900 mb-4">Mua sản phẩm này</h4>
+                        <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                            <h3 class="text-lg font-semibold text-white mb-4">Contact Developer</h3>
                             <div class="space-y-4 mb-6">
                                 <div class="flex items-center justify-between">
-                                    <span class="text-gray-600">Giá sản phẩm:</span>
-                                    <span id="modalCheckoutPrice" class="text-xl font-bold text-gray-900"></span>
+                                    <span class="text-gray-400">Status:</span>
+                                    <span id="modalProjectStatus" class="text-white font-semibold"></span>
                                 </div>
                                 <div class="flex items-center justify-between">
-                                    <span class="text-gray-600">Phí dịch vụ:</span>
-                                    <span class="text-gray-900">Miễn phí</span>
-                                </div>
-                                <hr class="border-gray-200">
-                                <div class="flex items-center justify-between">
-                                    <span class="text-lg font-semibold text-gray-900">Tổng cộng:</span>
-                                    <span id="modalTotalPrice" class="text-xl font-bold text-teal-600"></span>
+                                    <span class="text-gray-400">Downloads:</span>
+                                    <span id="modalProjectDownloads" class="text-white font-semibold"></span>
                                 </div>
                             </div>
                             
                             <button 
-                                id="purchaseBtn"
-                                onclick="purchaseProduct()"
-                                class="w-full bg-gradient-to-r from-teal-500 to-purple-600 text-white py-3 px-6 rounded-lg font-medium hover:from-teal-600 hover:phurple-700 transition-all duration-200 shadow-lg hover:shadow-xl mb-4"
+                                id="contactBtn"
+                                onclick="contactDeveloper()"
+                                class="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-6 rounded-lg font-medium hover:shadow-lg transition-all duration-200 mb-4"
                             >
-                                <i class="fas fa-shopping-cart mr-2"></i>
-                                Mua ngay
+                                <i class="fas fa-envelope mr-2"></i>
+                                Liên hệ Developer
                             </button>
                             
                             <button 
-                                onclick="addToWishlist()"
-                                id="wishlistBtn"
-                                class="w-full border border-gray-300 text-gray-700 py-3 px-6 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+                                onclick="addToFavorites()"
+                                id="favoriteBtn"
+                                class="w-full border border-gray-600 text-gray-300 py-3 px-6 rounded-lg font-medium hover:bg-gray-700 transition-colors"
                             >
                                 <i class="fas fa-heart mr-2"></i>
                                 Thêm vào yêu thích
@@ -277,24 +837,254 @@
         </div>
     </div>
 
-    <!-- Toast Notification -->
-    <div id="toast" class="hidden fixed top-4 right-4 z-50">
-        <div class="bg-white rounded-lg shadow-lg p-4 border-l-4 border-green-500">
-            <div class="flex items-center">
-                <i id="toastIcon" class="fas fa-check-circle text-green-500 mr-3"></i>
-                <div>
-                    <p id="toastTitle" class="font-medium text-gray-900">Thành công!</p>
-                    <p id="toastMessage" class="text-sm text-gray-600"></p>
-                </div>
-                <button onclick="hideToast()" class="ml-4 text-gray-400 hover:text-gray-600">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-
     <script src="../scripts/auth.js"></script>
-    <script src="../scripts/products-ui-fixed.js"></script>
+    <script>
+        let projects = [];
+
+        // Project data with gradient themes
+        const projectData = [
+            {
+                id: '1',
+                title: 'Premium Food Delivery App',
+                description: 'Ứng dụng đặt đồ ăn online với React Native và Firebase',
+                category: 'mobile',
+                categoryText: 'Mobile App',
+                status: 'completed',
+                techStack: ['React Native', 'Firebase', 'Redux', 'Google Maps'],
+                demoUrls: ['github.com/user/food-app'],
+                rating: 4.8,
+                downloads: 1200,
+                views: 2100,
+                gradient: 'linear-gradient(135deg, #ff6b35 0%, #f7931e 100%)',
+                mainText: 'FOOD APP PORTFOLIO',
+                subText: 'REACT NATIVE'
+            },
+            {
+                id: '2',
+                title: 'Premium AI ChatBot Web',
+                description: 'Website chat với AI tích hợp OpenAI GPT và socket.io',
+                category: 'web',
+                categoryText: 'Web Application',
+                status: 'active',
+                techStack: ['React', 'Node.js', 'OpenAI API', 'Socket.io'],
+                demoUrls: ['github.com/user/ai-chat', 'ai-chat.vercel.app'],
+                rating: 4.9,
+                downloads: 560,
+                views: 1500,
+                gradient: 'linear-gradient(135deg, #0077be 0%, #00a5ff 100%)',
+                mainText: 'AI CHATBOT PORTFOLIO',
+                subText: 'REACT NODEJS'
+            },
+            {
+                id: '3',
+                title: 'Premium IoT Smart Home',
+                description: 'Hệ thống nhà thông minh với Arduino và web dashboard',
+                category: 'iot',
+                categoryText: 'IoT Project',
+                status: 'prototype',
+                techStack: ['Arduino', 'ESP32', 'React', 'WebSocket'],
+                demoUrls: ['github.com/user/smart-home'],
+                rating: 4.7,
+                downloads: 890,
+                views: 3200,
+                gradient: 'linear-gradient(135deg, #00b894 0%, #00ce84 100%)',
+                mainText: 'SMART HOME PORTFOLIO',
+                subText: 'ARDUINO IOT'
+            },
+            {
+                id: '4',
+                title: 'Premium Crypto Trading App',
+                description: 'Ứng dụng trading cryptocurrency với real-time charts',
+                category: 'mobile',
+                categoryText: 'Mobile App',
+                status: 'active',
+                techStack: ['Flutter', 'Dart', 'WebSocket', 'Chart.js'],
+                demoUrls: ['github.com/user/crypto-app'],
+                rating: 4.6,
+                downloads: 2100,
+                views: 5100,
+                gradient: 'linear-gradient(135deg, #a855f7 0%, #c084fc 100%)',
+                mainText: 'CRYPTO APP PORTFOLIO',
+                subText: 'FLUTTER MOBILE'
+            },
+            {
+                id: '5',
+                title: 'Premium Social Media Platform',
+                description: 'Nền tảng mạng xã hội với tính năng video call',
+                category: 'web',
+                categoryText: 'Web Platform',
+                status: 'beta',
+                techStack: ['Next.js', 'Prisma', 'WebRTC', 'PostgreSQL'],
+                demoUrls: ['github.com/user/social-platform'],
+                rating: 4.8,
+                downloads: 1800,
+                views: 4800,
+                gradient: 'linear-gradient(135deg, #ef4444 0%, #f87171 100%)',
+                mainText: 'SOCIAL PLATFORM PORTFOLIO',
+                subText: 'NEXT.JS WEBRTC'
+            },
+            {
+                id: '6',
+                title: 'Premium E-learning Mobile',
+                description: 'Ứng dụng học online với AI tutor personal',
+                category: 'mobile',
+                status: 'completed',
+                techStack: ['React Native', 'TensorFlow', 'Node.js', 'MongoDB'],
+                demoUrls: ['github.com/user/elearning-app'],
+                rating: 4.9,
+                downloads: 3200,
+                views: 7800,
+                gradient: 'linear-gradient(135deg, #fbbf24 0%, #fcd34d 100%)',
+                mainText: 'E-LEARNING PORTFOLIO',
+                subText: 'AI REACT NATIVE'
+            }
+        ];
+
+        function renderProjects() {
+            const grid = document.getElementById('projectsGrid');
+            const loading = document.getElementById('loadingState');
+            
+            loading.style.display = 'none';
+            grid.innerHTML = '';
+
+            projects.forEach(project => {
+                const card = createProjectCard(project);
+                grid.appendChild(card);
+            });
+        }
+
+        function createProjectCard(project) {
+            const card = document.createElement('div');
+            card.className = 'project-card';
+            card.style.setProperty('--card-gradient', project.gradient);
+
+            card.innerHTML = `
+                <div class="card-image" style="background: ${project.gradient}">
+                    <div class="card-badges">
+                        <span class="badge badge-version">PORTFOLIO<br/>${project.categoryText}</span>
+                        <span class="badge">${project.status.toUpperCase()}</span>
+                    </div>
+                    <div class="card-overlay">
+                        <div class="card-main-text" style="background: linear-gradient(45deg, #ffffff, #ffd700); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">${project.mainText}</div>
+                        <div class="card-sub-text" style="color: rgba(255,255,255,0.9); text-shadow: 0 0 10px rgba(0,0,0,0.5);">${project.subText}</div>
+                    </div>
+                </div>
+                
+                <div class="card-content">
+                    <h3 class="card-title">${project.title}</h3>
+                    <div class="card-category">${project.categoryText}</div>
+                    
+                    <div class="card-stats">
+                        <div class="stat">
+                            <div class="stat-value">${project.rating}</div>
+                            <div class="stat-label">Rating</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">${project.downloads.toLocaleString()}</div>
+                            <div class="stat-label">Downloads</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">${project.views.toLocaleString()}</div>
+                            <div class="stat-label">Views</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-actions">
+                        <button class="btn-primary" onclick="viewProject('${project.id}')">
+                            <i class="fas fa-eye mr-2"></i>
+                            Xem chi tiết
+                        </button>
+                        <button class="btn-secondary" onclick="addToFavorites('${project.id}')">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            return card;
+        }
+
+        function loadProjects(searchTerm = '') {
+            document.getElementById('loadingState').style.display = 'block';
+            document.getElementById('emptyState').style.display = 'none';
+            
+            setTimeout(() => {
+                if (searchTerm) {
+                    projects = projectData.filter(p => 
+                        p.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                        p.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                        p.category.toLowerCase().includes(searchTerm.toLowerCase())
+                    );
+                } else {
+                    projects = projectData;
+                }
+                
+                renderProjects();
+                
+                if (projects.length === 0) {
+                    document.getElementById('emptyState').style.display = 'block';
+                    document.getElementById('projectsGrid').style.display = 'none';
+                } else {
+                    document.getElementById('emptyState').style.display = 'none';
+                    document.getElementById('projectsGrid').style.display = 'grid';
+                }
+            }, 800);
+        }
+
+        function viewProject(projectId) {
+            const project = projects.find(p => p.id === projectId);
+            if (!project) return;
+
+            document.getElementById('modalProjectTitle').textContent = project.title;
+            document.getElementById('modalProjectDescription').textContent = project.description;
+            document.getElementById('modalProjectCategory').textContent = project.categoryText;
+            document.getElementById('modalProjectRating').textContent = `(${project.rating})`;
+            document.getElementById('modalProjectStatus').textContent = project.status.toUpperCase();
+            document.getElementById('modalProjectDownloads').textContent = project.downloads.toLocaleString();
+            
+            document.getElementById('modalProjectTech').innerHTML = 
+                project.techStack.map(tech => `<span class="inline-block bg-gray-700 px-2 py-1 rounded text-sm mr-2 mb-2">${tech}</span>`).join('');
+            
+            document.getElementById('modalProjectLinks').innerHTML = 
+                project.demoUrls.map(url => `<a href="${url}" class="block text-blue-400 hover:text-blue-300 mb-1">${url}</a>`).join('');
+            
+            document.getElementById('projectModal').style.display = 'flex';
+        }
+
+        function closeProjectModal() {
+            document.getElementById('projectModal').style.display = 'none';
+        }
+
+        function addToFavorites(projectId = null) {
+            const message = projectId ? 'Đã thêm vào yêu thích!' : 'Đã thêm vào yêu thích!';
+            showToast(message);
+        }
+
+        function contactDeveloper() {
+            showToast('Redirecting to contact form...');
+        }
+
+        function showToast(message) {
+            // Create toast notification
+            const toast = document.createElement('div');
+            toast.className = 'fixed top-4 right-4 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            loadProjects(e.target.value);
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProjects();
+        });
+    </script>
 </body>
 </html>
-
