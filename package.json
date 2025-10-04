@@ -10,8 +10,8 @@
     "server": "node backend/test-server.js",
     "server:dev": "nodemon backend/test-server.js",
     "start": "concurrently \"npm run build:css && node backend/test-server.js\" \"npm run dev\"",
-    "build:css": "tailwindcss -i ./scripts/style-optimized.css -o ./scripts/style-bundled.css --config ./config/tailwind.config.js -m",
-    "watch:css": "tailwindcss -i ./scripts/style-optimized.css -o ./scripts/style-bundled.css --config ./config/tailwind.config.js --watch"
+    "build:css": "npx tailwindcss -i ./scripts/base.css -o ./scripts/style.css --config ./config/tailwind.config.js",
+    "watch:css": "npx tailwindcss -i ./scripts/base.css -o ./scripts/style.css --config ./config/tailwind.config.js --watch"
   },
   "keywords": [
     "admin",
